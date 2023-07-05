@@ -2,10 +2,20 @@ import React from 'react';
 import classes from './LatestNews.module.css';
 import topicon from '../assets/top.svg';
 import righticon from '../assets/right.svg';
+import { useAppSelector } from '../Store/store';
 
 const LatestNews = () => {
+  const isActive =
+    useAppSelector((state) => state.news.homepageOption) === 'LATEST';
+
   return (
-    <aside className={classes.container}>
+    <aside
+      className={
+        isActive
+          ? `${classes.container} ${classes.active}`
+          : `${classes.container}`
+      }
+    >
       <div className={classes.title}>
         <img src={topicon} alt='alert icon for latest news' />
         <p>Latest news</p>

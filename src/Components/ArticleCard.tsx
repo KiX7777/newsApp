@@ -1,7 +1,19 @@
 import React from 'react';
 import classes from './ArticleCard.module.css';
 import pic from '../assets/trump.png';
+import FavoritesTabIcon from './FavoritesTabIcon';
+import { useAppDispatch, useAppSelector } from '../Store/store';
+import { newsActions } from '../Store/newsSlice';
 const ArticleCard = () => {
+  const dispatch = useAppDispatch();
+  const state = useAppSelector((state) => state.news);
+  const isFav = state.favorites.find((fav) => fav === 'test');
+  const handleFav = () => {
+    isFav
+      ? dispatch(newsActions.removeFav('test'))
+      : dispatch(newsActions.addFav('test'));
+  };
+
   return (
     <div className={classes.card}>
       <div className={classes.photo}>
@@ -14,6 +26,9 @@ const ArticleCard = () => {
         </div>
         <p className={classes.author}>Bertie Campbell</p>
       </div>
+      <button onClick={handleFav}>
+        <FavoritesTabIcon />
+      </button>
     </div>
   );
 };

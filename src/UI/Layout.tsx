@@ -3,10 +3,12 @@ import classes from './Layout.module.css';
 import Header from '../Components/Header';
 import Sidebar from '../Components/Sidebar';
 import HomepagePrompt from '../Components/HomepagePrompt';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import MobileMenu from '../Components/MobileMenu';
+import HomepagePicker from '../Components/HomepagePicker';
 
 const Layout = () => {
+  const page = useLocation().pathname;
   return (
     <div className={classes.layout}>
       <HomepagePrompt />
@@ -15,7 +17,7 @@ const Layout = () => {
         <div className={classes.mainContainer}>
           <Outlet />
           <MobileMenu />
-          <Sidebar />
+          {page === '/home' && <HomepagePicker />} <Sidebar />
         </div>
       </div>
     </div>

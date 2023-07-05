@@ -36,4 +36,18 @@ section .pageName {
     grid-template-columns: 1fr;
     grid-auto-rows: 26rem;
   }
+  section.active {
+    display: flex;
+    animation: show 400ms ease forwards;
+  }
+}
+@keyframes show {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
 }/*# sourceMappingURL=ArticlesSection.module.css.map */

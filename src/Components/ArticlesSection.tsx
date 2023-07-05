@@ -7,7 +7,6 @@ const ArticlesSection = () => {
   const location = useLocation();
   const { pathname } = location;
   const pageName = pathname.slice(1);
-  console.log(pageName);
 
   // ON LOAD GET CARDS FROM STATE AND CREATE CARDS AND RENDER THEM
 

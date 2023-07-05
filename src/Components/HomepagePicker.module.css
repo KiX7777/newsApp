@@ -17,8 +17,15 @@
   font-weight: 600;
   line-height: 2rem;
   letter-spacing: -0.023px;
+  transition: background 400ms ease, color 400ms ease;
 }
 .mobilePicker .option.active {
   background: rgba(187, 30, 30, 0.1);
   color: #bb1e1e;
+}
+
+@media screen and (width < 500px) {
+  .mobilePicker {
+    display: flex;
+  }
 }/*# sourceMappingURL=HomepagePicker.module.css.map */

@@ -27,7 +27,7 @@ const MobileMenu = () => {
         <span>My</span>News
       </h2>
       <SearchForm />
-      {open && <Sidebar />}
+      <Sidebar />
     </div>
   );
 };

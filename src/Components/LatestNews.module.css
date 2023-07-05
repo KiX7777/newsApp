@@ -94,11 +94,26 @@
 @media screen and (width < 500px) {
   .container {
     grid-column: unset;
+    display: none;
   }
   .container .title p {
     font-weight: 600;
   }
   .container .cardsContainer .newsCard {
     padding: 1.8rem 1.4rem 1.8rem 0;
+  }
+  .active {
+    display: flex;
+    animation: show 400ms ease forwards;
+  }
+}
+@keyframes show {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
   }
 }/*# sourceMappingURL=LatestNews.module.css.map */

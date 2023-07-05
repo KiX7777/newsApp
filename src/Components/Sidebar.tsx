@@ -10,6 +10,7 @@ import ScienceBtn from './ScienceBtn';
 import SportsBtn from './SportsBtn';
 import TechBtn from './TechBtn';
 import { useAppSelector } from '../Store/store';
+import FavoritesTabIcon from './FavoritesTabIcon';
 
 const Sidebar = () => {
   const show = useAppSelector((state) => state.news.mobileMenuOpen);
@@ -82,6 +83,15 @@ const Sidebar = () => {
       >
         <TechBtn />
         Technology
+      </NavLink>
+      <NavLink
+        to={''}
+        className={({ isActive }) =>
+          isActive ? `${classes.active} ${classes.navBtn}` : `${classes.navBtn}`
+        }
+      >
+        <FavoritesTabIcon />
+        Favorites
       </NavLink>
     </nav>
   );

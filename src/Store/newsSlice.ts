@@ -8,6 +8,7 @@ interface NewsState {
   mobileMenuOpen: boolean;
   homepageOption: 'FEATURED' | 'LATEST';
   homepagePrompt: boolean;
+  favorites: any[];
 }
 
 const initialState: NewsState = {
@@ -18,6 +19,7 @@ const initialState: NewsState = {
   mobileMenuOpen: false,
   homepageOption: 'FEATURED',
   homepagePrompt: true,
+  favorites: [],
 };
 
 export const newsSlice = createSlice({
@@ -33,23 +35,31 @@ export const newsSlice = createSlice({
     dismissPrompt: (state) => {
       state.homepagePrompt = false;
     },
-    setSearch: (state, payload: PayloadAction<string>) => {
-      state.searchQuery = payload.payload;
+    setSearch: (state, action: PayloadAction<string>) => {
+      state.searchQuery = action.payload;
     },
-    setPage: (state, payload: PayloadAction<number>) => {
-      state.page = payload.payload;
+    setPage: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
     },
-    setTotalPages: (state, payload: PayloadAction<number>) => {
-      state.page = payload.payload;
+    setTotalPages: (state, action: PayloadAction<number>) => {
+      state.page = action.payload;
     },
-    setArticles: (state, payload: PayloadAction<any[]>) => {
-      state.articles = payload.payload;
+    setArticles: (state, action: PayloadAction<any[]>) => {
+      state.articles = action.payload;
     },
     setHomepageOption: (
       state,
       payload: PayloadAction<'FEATURED' | 'LATEST'>
     ) => {
       state.homepageOption = payload.payload;
+    },
+    addFav: (state, action: PayloadAction<string>) => {
+      state.favorites.push(action.payload);
+    },
+    removeFav: (state, action: PayloadAction<string>) => {
+      state.favorites = state.favorites.filter(
+        (fav) => fav.id === action.payload
+      );
     },
   },
 });
