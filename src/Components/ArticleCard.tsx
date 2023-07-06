@@ -4,31 +4,47 @@ import pic from '../assets/trump.png';
 import FavoritesTabIcon from './FavoritesTabIcon';
 import { useAppDispatch, useAppSelector } from '../Store/store';
 import { newsActions } from '../Store/newsSlice';
-const ArticleCard = () => {
+import fallbackImg from '../assets/noimg.svg.webp';
+import { useNavigate } from 'react-router-dom';
+
+interface CardProps {
+  author: string;
+  title: string;
+  section: string;
+  image: string;
+  id: string;
+}
+
+const ArticleCard = ({ author, title, section, image, id }: CardProps) => {
   const dispatch = useAppDispatch();
   const state = useAppSelector((state) => state.news);
-  const isFav = state.favorites.find((fav) => fav === 'test');
-  const handleFav = () => {
-    isFav
-      ? dispatch(newsActions.removeFav('test'))
-      : dispatch(newsActions.addFav('test'));
-  };
+  const navigate = useNavigate();
 
   return (
-    <div className={classes.card}>
+    <div
+      className={classes.card}
+      onClick={() => {
+        navigate(`/article/${id}`);
+        console.log(id);
+      }}
+    >
       <div className={classes.photo}>
-        <img src={pic} alt='trump' />
+        <img
+          src={image}
+          alt={title}
+          onError={(e) => {
+            e.currentTarget.onerror = null; // prevents looping
+            e.currentTarget.src = fallbackImg;
+          }}
+        />
       </div>
       <div className={classes.info}>
         <div className={classes.title}>
-          <small>Sport</small>
-          <h3 className={classes.headline}>Fta Keys</h3>
+          <small>{section}</small>
+          <h3 className={classes.headline}>{title}</h3>
         </div>
-        <p className={classes.author}>Bertie Campbell</p>
+        <p className={classes.author}>{author}</p>
       </div>
-      <button onClick={handleFav}>
-        <FavoritesTabIcon />
-      </button>
     </div>
   );
 };

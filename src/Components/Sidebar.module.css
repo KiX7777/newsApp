@@ -47,6 +47,7 @@
     animation: show 1000ms ease forwards;
   }
   .sidebar {
+    z-index: -1;
     width: 100%;
     display: none;
     padding: 1.4rem;

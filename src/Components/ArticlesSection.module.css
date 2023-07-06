@@ -14,11 +14,17 @@ section .pageName {
   letter-spacing: -0.153px;
   text-transform: capitalize;
 }
+section .loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(2);
+}
 
 .articleContainer {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 25rem;
   gap: 2.2rem;
   grid-template-columns: repeat(3, 1fr);
 }
@@ -29,6 +35,9 @@ section .pageName {
   }
 }
 @media screen and (width < 500px) {
+  section .loader {
+    transform: translate(-50%, -50%) scale(1.5);
+  }
   section .news {
     display: none;
   }

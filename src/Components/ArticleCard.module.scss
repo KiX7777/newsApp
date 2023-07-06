@@ -1,4 +1,5 @@
 @use '../assets/styles/mixins' as *;
+@use '../assets/styles/colors' as *;
 .card {
   // max-height: 25rem;
   @include flex($direction: column);
@@ -17,7 +18,10 @@
       object-fit: cover;
     }
   }
-
+  .fav {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
   .info {
     @include flex(space-between, initial, column);
 
@@ -28,6 +32,7 @@
       display: flex;
       flex-direction: column;
       gap: 0.2rem;
+      height: 70%;
 
       small {
         color: #1e71bb;
@@ -42,12 +47,21 @@
 
       .headline {
         color: #000;
+        white-space: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
         font-size: 1.6rem;
         font-family: Inter;
         font-style: normal;
         font-weight: 400;
         line-height: 2rem;
         letter-spacing: -0.11px;
+      }
+      .headline::-webkit-scrollbar {
+        height: 3px;
+      }
+      .headline::-webkit-scrollbar-thumb {
+        background-color: #cdcdcd;
       }
     }
     .author {

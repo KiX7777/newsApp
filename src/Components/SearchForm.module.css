@@ -5,7 +5,6 @@ form {
   width: 100%;
   border: 1px solid black;
   align-items: center;
-  padding: 1.5rem;
   max-width: 72.5rem;
   box-shadow: 0px 1px 2px -1px #c8cad1;
 }
@@ -13,12 +12,16 @@ form img {
   height: 2rem;
   width: 2rem;
   margin-right: 1.5rem;
+  margin: 0 1.5rem;
 }
 form input {
   flex: 1;
   font-size: 1.6rem;
   font-family: inherit;
   border: none;
+}
+form input:focus {
+  outline: none;
 }
 form .searchBtn {
   background-color: white;
@@ -28,6 +31,7 @@ form .searchBtn {
   border-radius: 6px;
   background: #bb1e1e;
   color: white;
+  margin: 0.5rem;
 }
 
 form input::-moz-placeholder {

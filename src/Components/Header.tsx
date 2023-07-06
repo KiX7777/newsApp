@@ -4,6 +4,7 @@ import hamburger from '../assets/hamburger.svg';
 import SearchForm from './SearchForm';
 import { useAppDispatch, useAppSelector } from '../Store/store';
 import { newsActions } from '../Store/newsSlice';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const dispatch = useAppDispatch();
@@ -15,9 +16,9 @@ const Header = () => {
   return (
     <header className={classes.header}>
       <div className={classes.title}>
-        <h2>
+        <Link to={'/'}>
           <span>My</span>News
-        </h2>
+        </Link>
         <button onClick={handleOpen} className={classes.hamburger}>
           <img src={hamburger} alt='menu toggle' />
         </button>

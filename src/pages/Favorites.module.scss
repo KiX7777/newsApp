@@ -1,11 +1,15 @@
-section {
+.favorites {
   flex: 1;
   display: flex;
   flex-direction: column;
   gap: 1.6rem;
 
-  //to put it in the right order and hide sidebar on mobile
-  order: 2;
+  .notification {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 
   .news {
     color: #1d1d1b;

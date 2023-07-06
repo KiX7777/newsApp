@@ -10,7 +10,6 @@
 
   .container {
     width: 100%;
-    padding: 0 2rem;
     max-width: 1095px;
     margin: auto;
     display: flex;
@@ -26,7 +25,7 @@
       font-size: 16px;
       font-family: Inter;
       font-style: normal;
-      font-weight: bold;
+      font-weight: 600;
       line-height: 21px;
       letter-spacing: -0.136px;
     }
@@ -55,7 +54,7 @@
       text-align: center;
       font-size: 14px;
       font-style: normal;
-      font-weight: bold;
+      font-weight: 600;
       line-height: 20px;
       border: none;
     }
@@ -95,6 +94,11 @@
   animation: disappear 500ms ease forwards;
 }
 
+@media screen and (width < 1120px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
 @media screen and (width < 500px) {
   .prompt {
     display: none;

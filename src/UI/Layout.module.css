@@ -13,7 +13,7 @@
 }
 
 .mainContainer {
-  padding: 2.4rem 2rem;
+  padding: 2.4rem 0;
   flex: 1;
   display: flex;
   gap: 2.5rem;
@@ -29,5 +29,10 @@
   }
   .mainContainer .mobilePicker {
     display: flex;
+  }
+}
+@media screen and (width < 1120px) {
+  .mainContainer {
+    padding: 2.4rem 2rem;
   }
 }/*# sourceMappingURL=Layout.module.css.map */

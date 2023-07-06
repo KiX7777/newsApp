@@ -53,6 +53,8 @@
     animation: show 1000ms ease forwards;
   }
   .sidebar {
+    // order: 2;
+    z-index: -1;
     width: 100%;
     display: none;
     padding: 1.4rem;
