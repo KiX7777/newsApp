@@ -3,7 +3,7 @@ import { Article, GenericObj } from '../models';
 import { v4 as uuidv4 } from 'uuid';
 import { NewsState } from './newsSlice';
 
-const APIKEY = 'bc7a8a8a654e475e8c77f692397f3d33';
+const APIKEY = 'a32a159ec4bf4ba9ad86a81b74194867';
 
 export const getNYFeatured = createAsyncThunk(
   'news/NYTIMES_Featured',
