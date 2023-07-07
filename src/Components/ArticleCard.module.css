@@ -1,0 +1,99 @@
+.card {
+  display: flex;
+  justify-content: initial;
+  align-items: initial;
+  flex-direction: column;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0px 1px 2px -1px #c8cad1;
+  overflow: hidden;
+  animation: show 800ms ease forwards;
+}
+.card .photo {
+  height: 60%;
+}
+.card .photo img {
+  width: 100%;
+  height: 100%;
+  -o-object-position: top;
+     object-position: top;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.card .fav {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+.card .info {
+  display: flex;
+  justify-content: space-between;
+  align-items: initial;
+  flex-direction: column;
+  flex: 1;
+  padding: 1.2rem;
+}
+.card .info .title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  height: 70%;
+}
+.card .info .title small {
+  color: #1e71bb;
+  font-size: 1rem;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 1.6rem;
+  letter-spacing: -0.015px;
+  text-transform: uppercase;
+}
+.card .info .title .headline {
+  color: #000;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  font-size: 1.6rem;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 2rem;
+  letter-spacing: -0.11px;
+}
+.card .info .title .headline::-webkit-scrollbar {
+  height: 3px;
+}
+.card .info .title .headline::-webkit-scrollbar-thumb {
+  background-color: #cdcdcd;
+}
+.card .info .author {
+  color: #1d1d1b;
+  font-size: 1.2rem;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.068px;
+}
+
+@media screen and (width < 500px) {
+  .card .info {
+    justify-content: center;
+  }
+  .card .photo {
+    height: 65%;
+  }
+  .author {
+    display: none;
+  }
+}
+@keyframes show {
+  from {
+    opacity: 0;
+    visibility: hidden;
+  }
+  to {
+    opacity: 1;
+    visibility: visible;
+  }
+}/*# sourceMappingURL=ArticleCard.module.css.map */

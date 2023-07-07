@@ -1,0 +1,33 @@
+@use '../assets/styles/mixins' as *;
+@use '../assets/styles/colors' as *;
+
+.mobilePicker {
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  .option {
+    @include flex(center, center);
+    padding: 1rem 1.5rem;
+    border-radius: 2rem;
+    color: $darkText;
+    font-size: 1.6rem;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 2rem;
+    letter-spacing: -0.023px;
+    transition: background 400ms ease, color 400ms ease;
+  }
+
+  .option.active {
+    background: rgba(187, 30, 30, 0.1);
+    color: $primary;
+  }
+}
+
+@media screen and (width < 500px) {
+  .mobilePicker {
+    display: flex;
+  }
+}

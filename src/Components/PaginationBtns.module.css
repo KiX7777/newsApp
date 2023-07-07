@@ -1,0 +1,25 @@
+.btns {
+  display: flex;
+  justify-content: center;
+  align-items: initial;
+  flex-direction: row;
+  gap: 1rem;
+}
+.btns .btn {
+  padding: 1rem;
+  background-color: #bb1e1e;
+  color: white;
+  font-size: 1.2rem;
+  transition: color 400ms ease, background-color 400ms ease;
+  border: none;
+  cursor: pointer;
+  border-radius: 1rem;
+  border: 1px solid #bb1e1e;
+  font-family: Inter;
+  font-weight: 600;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+}
+.btns .btn:hover {
+  background-color: white;
+  color: #bb1e1e;
+}/*# sourceMappingURL=PaginationBtns.module.css.map */

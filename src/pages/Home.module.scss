@@ -1,0 +1,61 @@
+.home {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  //to put it in the right order and hide sidebar on mobile
+  order: 2;
+
+  .news {
+    color: #1d1d1b;
+    font-size: 18px;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    letter-spacing: -0.153px;
+  }
+
+  .loader {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}
+.articleContainer {
+  flex: 1;
+  display: grid;
+  grid-auto-rows: 25rem;
+  gap: 2.2rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media screen and (width > 1800px) {
+  .articleContainer {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+@media screen and (width < 900px) {
+  .articleContainer {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media screen and (width < 500px) {
+  .home {
+    order: 1;
+
+    .loader {
+      transform: translate(-50%, -50%) scale(1.5);
+    }
+
+    .news {
+      display: none;
+    }
+    .articleContainer {
+      grid-template-columns: 1fr;
+      grid-auto-rows: 26rem;
+    }
+  }
+}

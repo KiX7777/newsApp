@@ -1,46 +1,14 @@
-# Getting Started with Create React App
+npm i
+npm start
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+!! Prilikom promjene kategorije s Home na General zbog Strict Modea se dvaput fetchaju podaci, ako se isključi onda je normalno sve.
 
-## Available Scripts
+Dodana je stranica za svaki članak, koja se otvara prilikom klika na karticu.
+Za state management je korišten Redux, a u local storageu su se neki podaci iz statea pohranili kako bi se na reloadu stranice zadržao state (npr. ako se otvori stranica članka i reloada, state bi se obrisao na resetu i stranica bi failala, ovako se iz statea to povuče); nešto slično Redux Persistu
 
-In the project directory, you can run:
+Favorites kategorija je dodana u sidebar, a članci se dodaju u favorite tako da se na stranici članka klikne na ikonu zvjezdice.
+Slike koje se dobiju s API-ja su poprilično velike, na to nisam mogao utjecati. NY Times je korišten za Home page, a za ostale stranice je korišten newsAPI.
+SVG ikonice sam kreirao kao zasebne komponente kako bih mogao manipulariti atributima elementa.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Prompt na vrhu stranice nestaje nakon klika na jedan od gumba i više se ne pojavljuje.
+Za naslove članaka koji su dugački sam stavio horizontalni scroll jer mi tako ljepše izgleda nego da se breaka u novi red i onda odreže samo.

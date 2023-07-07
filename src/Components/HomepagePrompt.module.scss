@@ -1,0 +1,88 @@
+.prompt {
+  background-image: url('/src/assets/promptvector.png'),
+    linear-gradient(180deg, #bb1e1e 0%, #b21919 100%);
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-size: cover;
+  width: 100%;
+
+  .container {
+    width: 100%;
+    max-width: 1095px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  .promptTxt {
+    display: flex;
+    align-items: center;
+    gap: 4.6rem;
+
+    h5 {
+      color: #fff;
+      font-size: 1.6rem;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 2.1rem;
+      letter-spacing: -0.136px;
+    }
+    p {
+      color: #fff;
+      font-size: 1.4rem;
+      font-family: Inter;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 2.1rem;
+      letter-spacing: -0.119px;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 2.4rem;
+    align-items: center;
+    justify-content: center;
+
+    .rejectBtn {
+      cursor: pointer;
+
+      background-color: transparent;
+      color: #fff;
+      text-align: center;
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 2rem;
+      border: none;
+    }
+    .acceptBtn {
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      background: #fff;
+      color: #1d1d1b;
+      text-align: center;
+      font-size: 1.4rem;
+      font-style: normal;
+      font-weight: bold;
+      line-height: 2rem;
+      text-transform: uppercase;
+      width: 6.9rem;
+      height: 4rem;
+    }
+  }
+}
+
+@media screen and (width < 1120px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+@media screen and (width < 500px) {
+  .prompt {
+    display: none;
+  }
+}

@@ -1,0 +1,31 @@
+.mobilePicker {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+.mobilePicker .option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  color: #1d1d1b;
+  font-size: 1.6rem;
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 2rem;
+  letter-spacing: -0.023px;
+  transition: background 400ms ease, color 400ms ease;
+}
+.mobilePicker .option.active {
+  background: rgba(187, 30, 30, 0.1);
+  color: #bb1e1e;
+}
+
+@media screen and (width < 500px) {
+  .mobilePicker {
+    display: flex;
+  }
+}/*# sourceMappingURL=HomepagePicker.module.css.map */
