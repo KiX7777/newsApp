@@ -1,4 +1,3 @@
-import React from 'react';
 import classes from './BreakingCard.module.css';
 const BreakingCard = () => {
   return (

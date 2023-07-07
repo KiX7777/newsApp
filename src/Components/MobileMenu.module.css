@@ -16,6 +16,7 @@
 }
 .mobileMenu .closeMenu {
   border: none;
+  background-color: transparent;
   position: fixed;
   top: 3rem;
   right: 2rem;

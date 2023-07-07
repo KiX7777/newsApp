@@ -1,30 +1,28 @@
-import React from 'react';
 import classes from './Sidebar.module.css';
 
 import { NavLink } from 'react-router-dom';
-import HomeBtn from './HomeBtn';
-import GeneralBtn from './GeneralBtn';
-import BusinessBtn from './BusinessBtn';
-import HealthBtn from './HealthBtn';
-import ScienceBtn from './ScienceBtn';
-import SportsBtn from './SportsBtn';
-import TechBtn from './TechBtn';
+import HomeBtn from '../assets/icons/HomeBtn';
+import GeneralBtn from '../assets/icons/GeneralBtn';
+import BusinessBtn from '../assets/icons/BusinessBtn';
+import HealthBtn from '../assets/icons/HealthBtn';
+import ScienceBtn from '../assets/icons/ScienceBtn';
+import SportsBtn from '../assets/icons/SportsBtn';
+import TechBtn from '../assets/icons/TechBtn';
 import { useAppDispatch, useAppSelector } from '../Store/store';
-import FavoritesTabIcon from './FavoritesTabIcon';
+import FavoritesTabIcon from '../assets/icons/FavoritesTabIcon';
 import { newsActions } from '../Store/newsSlice';
 
 const Sidebar = () => {
   const show = useAppSelector((state) => state.news.mobileMenuOpen);
   const isMobileOpen = useAppSelector((state) => state.news.mobileMenuOpen);
-  const favs = useAppSelector((state) => state.news.favorites);
   const dispatch = useAppDispatch();
 
   const handleClick = () => {
     if (isMobileOpen) {
       dispatch(newsActions.closeMobileMenu());
-      // dispatch(newsActions)
     }
     dispatch(newsActions.setPage(1));
+    dispatch(newsActions.resetInfinite());
   };
 
   return (
@@ -103,20 +101,17 @@ const Sidebar = () => {
         <TechBtn />
         Technology
       </NavLink>
-      {favs.length > 0 && (
-        <NavLink
-          onClick={handleClick}
-          to={'/favorites'}
-          className={({ isActive }) =>
-            isActive
-              ? `${classes.active} ${classes.navBtn}`
-              : `${classes.navBtn}`
-          }
-        >
-          <FavoritesTabIcon />
-          Favorites
-        </NavLink>
-      )}
+
+      <NavLink
+        onClick={handleClick}
+        to={'/favorites'}
+        className={({ isActive }) =>
+          isActive ? `${classes.active} ${classes.navBtn}` : `${classes.navBtn}`
+        }
+      >
+        <FavoritesTabIcon />
+        Favorites
+      </NavLink>
     </nav>
   );
 };

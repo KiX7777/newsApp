@@ -1,9 +1,4 @@
-import React from 'react';
 import classes from './ArticleCard.module.css';
-import pic from '../assets/trump.png';
-import FavoritesTabIcon from './FavoritesTabIcon';
-import { useAppDispatch, useAppSelector } from '../Store/store';
-import { newsActions } from '../Store/newsSlice';
 import fallbackImg from '../assets/noimg.svg.webp';
 import { useNavigate } from 'react-router-dom';
 
@@ -16,14 +11,12 @@ interface CardProps {
 }
 
 const ArticleCard = ({ author, title, section, image, id }: CardProps) => {
-  const dispatch = useAppDispatch();
-  const state = useAppSelector((state) => state.news);
   const navigate = useNavigate();
 
   return (
     <div
       className={classes.card}
-      onClick={() => {
+      onClick={(): void => {
         navigate(`/article/${id}`);
         console.log(id);
       }}
@@ -33,7 +26,7 @@ const ArticleCard = ({ author, title, section, image, id }: CardProps) => {
           src={image}
           alt={title}
           onError={(e) => {
-            e.currentTarget.onerror = null; // prevents looping
+            e.currentTarget.onerror = null;
             e.currentTarget.src = fallbackImg;
           }}
         />

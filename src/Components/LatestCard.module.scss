@@ -1,14 +1,12 @@
 @use '../assets/styles/colors' as *;
+@use '../assets/styles/mixins' as *;
 
 .card {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+  @include flex(center, initial, column);
   border-bottom: 1px solid #f4f5f8;
   padding: 1.4rem 1.2rem 1.4rem 0;
   flex: 1;
   max-height: 8.5rem;
-  // min-height: 8.5rem;
   max-width: 100%;
 
   small {
@@ -22,7 +20,7 @@
     text-transform: uppercase;
   }
 
-  //Mislim da je bolje da se scrolla horizontalno nego da se naslov samo odsječe
+  //Po meni, bolje izgleda da se scrolla horizontalno nego da se naslov samo odsječe
 
   h4 {
     color: $text;
@@ -32,13 +30,15 @@
     font-weight: 400;
     line-height: 2rem;
     letter-spacing: -0.11px;
+    overflow-y: hidden;
     overflow-x: auto;
-    text-overflow: ellipsis;
+
+    //ako se ovo isključi onda nema scrolla i nema elipse → kao što je u dizajnu
     white-space: nowrap;
 
     //ako se ovo uključi onda se pokaže elipsa (...), ali nema scrolla
+    // text-overflow: ellipsis;
     // overflow: hidden;
-    // overflow-wrap: break-word;
   }
 
   h4::-webkit-scrollbar {

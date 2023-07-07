@@ -14,9 +14,9 @@ const Search = () => {
   const dispatch = useAppDispatch();
   const articles = useAppSelector((state) => state.news.articles);
   const loading = useAppSelector((state) => state.news.loading);
-  const search = useAppSelector((state) => state.news.searchQuery);
   const page = useAppSelector((state) => state.news.page);
   const searchParam = useLocation().pathname.slice(8);
+  const error = useAppSelector((state) => state.news.error);
 
   useEffect(() => {
     let ignore = false;
@@ -47,8 +47,14 @@ const Search = () => {
       <main className={classes.articleContainer}>
         {loading ? (
           <GridLoader color='#BB1E1E' className={classes.loader} />
+        ) : !error ? (
+          articles.length > 0 ? (
+            !error && cards
+          ) : (
+            <h1>No results found</h1>
+          )
         ) : (
-          cards
+          <h1>{error}</h1>
         )}
       </main>
       {!loading && <PaginationBtns />}

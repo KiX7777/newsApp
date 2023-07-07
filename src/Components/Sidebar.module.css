@@ -4,7 +4,6 @@
   height: -moz-fit-content;
   height: fit-content;
   flex-direction: column;
-  order: 1;
 }
 .sidebar .navBtn {
   display: flex;
@@ -18,7 +17,7 @@
   cursor: pointer;
   gap: 4px;
   text-align: center;
-  font-size: 10px;
+  font-size: 1rem;
   font-family: Inter;
   font-style: normal;
   font-weight: 700;
@@ -42,10 +41,6 @@
 }
 
 @media screen and (width < 500px) {
-  .sidebar.mobile {
-    display: flex;
-    animation: show 1000ms ease forwards;
-  }
   .sidebar {
     z-index: -1;
     width: 100%;
@@ -73,6 +68,11 @@
     border-radius: 5px;
     background: #fff;
     box-shadow: 0px 6px 36px 0px rgba(0, 0, 0, 0.16);
+  }
+  .sidebar.mobile {
+    display: flex;
+    animation: show 1000ms ease forwards;
+    order: 2;
   }
 }
 @keyframes show {

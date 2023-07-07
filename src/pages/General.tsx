@@ -1,4 +1,3 @@
-import React from 'react';
 import ArticlesSection from '../Components/ArticlesSection';
 
 const General = () => {

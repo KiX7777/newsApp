@@ -6,18 +6,20 @@ import HomepagePrompt from '../Components/HomepagePrompt';
 import { Outlet, useLocation } from 'react-router-dom';
 import MobileMenu from '../Components/MobileMenu';
 import HomepagePicker from '../Components/HomepagePicker';
+import { useAppSelector } from '../Store/store';
 
 const Layout = () => {
+  const prompt = useAppSelector((state) => state.news.homepagePrompt);
   const page = useLocation().pathname;
   return (
     <div className={classes.layout}>
-      <HomepagePrompt />
+      {prompt && <HomepagePrompt />}
       <div className={classes.rootContainer}>
         <Header />
         <div className={classes.mainContainer}>
+          {page === '/home' && <HomepagePicker />} <Sidebar />
           <Outlet />
           <MobileMenu />
-          {page === '/home' && <HomepagePicker />} <Sidebar />
         </div>
       </div>
     </div>

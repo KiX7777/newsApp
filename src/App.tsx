@@ -1,25 +1,42 @@
-import React from 'react';
 import './App.css';
-import store from './Store/store';
+import store, { useAppDispatch, useAppSelector } from './Store/store';
 import { useEffect } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import {
+  Routes,
+  Route,
+  Navigate,
+  useSearchParams,
+  useLocation,
+} from 'react-router-dom';
 import Home from './pages/Home';
 import Layout from './UI/Layout';
 import ArticlesSection from './Components/ArticlesSection';
 import Search from './pages/Search';
 import ArticlePage from './pages/ArticlePage';
 import Favorites from './pages/Favorites';
+import NotFound from './pages/NotFound';
 
 function App() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const dispatch = useAppDispatch();
+  const page = useAppSelector((state) => state.news.page);
+  const location = useLocation();
+
   useEffect(() => {
     const handleChange = (): void => {
       localStorage.setItem(
         'favorites',
         JSON.stringify(store.getState().news.favorites)
       );
+      if (store.getState().news.articles) {
+        localStorage.setItem(
+          'articles',
+          JSON.stringify(store.getState().news.articles)
+        );
+      }
       localStorage.setItem(
-        'articles',
-        JSON.stringify(store.getState().news.articles)
+        'latestArticles',
+        JSON.stringify(store.getState().news.latestNewsArticles)
       );
       localStorage.setItem(
         'homepagePrompt',
@@ -34,6 +51,21 @@ function App() {
       unsubscribe();
     };
   }, []);
+
+  useEffect(() => {
+    if (location.pathname === '/') {
+      return;
+    } else {
+      if (page === 1) {
+        setSearchParams();
+      } else {
+        setSearchParams({
+          page: `${page}`,
+        });
+      }
+    }
+    return () => {};
+  }, [page, setSearchParams, dispatch, searchParams, location.pathname]);
 
   return (
     <>
@@ -50,6 +82,7 @@ function App() {
           <Route path='search/:query' element={<Search />} />
           <Route path='article/:id' element={<ArticlePage />} />
           <Route path='favorites' element={<Favorites />} />
+          <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>
     </>

@@ -5,8 +5,6 @@
   display: flex;
   height: fit-content;
   flex-direction: column;
-  //to put it in the right order and hide sidebar on mobile
-  order: 1;
 
   .navBtn {
     display: flex;
@@ -20,7 +18,7 @@
     cursor: pointer;
     gap: 4px;
     text-align: center;
-    font-size: 10px;
+    font-size: 1rem;
     font-family: Inter;
     font-style: normal;
     font-weight: 700;
@@ -47,13 +45,7 @@
 }
 
 @media screen and (width < 500px) {
-  .sidebar.mobile {
-    //show only when menu is open on mobile view
-    display: flex;
-    animation: show 1000ms ease forwards;
-  }
   .sidebar {
-    // order: 2;
     z-index: -1;
     width: 100%;
     display: none;
@@ -62,14 +54,10 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 3.6rem;
-    // grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
 
     .navBtn {
-      // width: calc(33% - 8px);
-
       text-align: center;
       font-size: 1.4rem;
-
       font-weight: 600;
       line-height: 19.704px;
       letter-spacing: 0.141px;
@@ -86,6 +74,12 @@
       background: #fff;
       box-shadow: 0px 6px 36px 0px rgba(0, 0, 0, 0.16);
     }
+  }
+  .sidebar.mobile {
+    //show only when menu is open on mobile view
+    display: flex;
+    animation: show 1000ms ease forwards;
+    order: 2;
   }
 }
 

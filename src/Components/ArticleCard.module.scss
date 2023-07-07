@@ -1,7 +1,6 @@
 @use '../assets/styles/mixins' as *;
 @use '../assets/styles/colors' as *;
 .card {
-  // max-height: 25rem;
   @include flex($direction: column);
 
   border-radius: 8px;

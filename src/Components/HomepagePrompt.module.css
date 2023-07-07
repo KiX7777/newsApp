@@ -21,20 +21,20 @@
 }
 .prompt .promptTxt h5 {
   color: #fff;
-  font-size: 16px;
+  font-size: 1.6rem;
   font-family: Inter;
   font-style: normal;
   font-weight: 600;
-  line-height: 21px;
+  line-height: 2.1rem;
   letter-spacing: -0.136px;
 }
 .prompt .promptTxt p {
   color: #fff;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-family: Inter;
   font-style: normal;
   font-weight: 400;
-  line-height: 21px;
+  line-height: 2.1rem;
   letter-spacing: -0.119px;
 }
 .prompt .buttons {
@@ -48,10 +48,10 @@
   background-color: transparent;
   color: #fff;
   text-align: center;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: 600;
-  line-height: 20px;
+  line-height: 2rem;
   border: none;
 }
 .prompt .buttons .acceptBtn {
@@ -61,29 +61,13 @@
   background: #fff;
   color: #1d1d1b;
   text-align: center;
-  font-size: 14px;
+  font-size: 1.4rem;
   font-style: normal;
   font-weight: bold;
-  line-height: 20px;
+  line-height: 2rem;
   text-transform: uppercase;
   width: 6.9rem;
   height: 4rem;
-}
-
-@keyframes disappear {
-  from {
-    height: 6rem;
-    visibility: visible;
-    opacity: 1;
-  }
-  to {
-    height: 0;
-    visibility: hidden;
-    opacity: 0;
-  }
-}
-.prompt.dismiss {
-  animation: disappear 500ms ease forwards;
 }
 
 @media screen and (width < 1120px) {

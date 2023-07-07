@@ -17,6 +17,7 @@ const ArticlesSection = () => {
   const articles = useAppSelector((state) => state.news.articles);
   const loading = useAppSelector((state) => state.news.loading);
   const page = useAppSelector((state) => state.news.page);
+  const error = useAppSelector((state) => state.news.error);
 
   useEffect(() => {
     let ignore = false;
@@ -41,13 +42,15 @@ const ArticlesSection = () => {
   ));
 
   return (
-    <section>
+    <section className={classes.articles}>
       <h3 className={classes.pageName}>{pageName}</h3>
       <main className={classes.articleContainer}>
         {loading ? (
           <GridLoader color='#BB1E1E' className={classes.loader} />
-        ) : (
+        ) : !error ? (
           cards
+        ) : (
+          <h1>{error}</h1>
         )}
       </main>
       {!loading && <PaginationBtns />}

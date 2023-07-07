@@ -22,19 +22,30 @@ export interface NewsState {
 
 let favorites;
 let articles;
+let latestArt;
 let homepagePrompt;
 let page;
 const localFav = localStorage.getItem('favorites');
 const localPage = localStorage.getItem('page');
 const localArt = localStorage.getItem('articles');
+const localLat = localStorage.getItem('latestArticles');
 const homePrompt = localStorage.getItem('homepagePrompt');
 
-localPage ? (page = JSON.parse(localPage)) : (page = 1);
+const urlParams = new URLSearchParams(window.location.search);
+let pageParam = urlParams.get('page');
+
+pageParam
+  ? (page = pageParam)
+  : localPage
+  ? (page = JSON.parse(localPage))
+  : (page = 1);
+
 localFav ? (favorites = JSON.parse(localFav)) : (favorites = []);
 localArt ? (articles = JSON.parse(localArt)) : (articles = []);
+localLat ? (latestArt = JSON.parse(localLat)) : (latestArt = []);
 homePrompt
   ? (homepagePrompt = JSON.parse(homePrompt))
-  : (homepagePrompt = false);
+  : (homepagePrompt = true);
 
 const initialState: NewsState = {
   articles: articles,
@@ -43,14 +54,14 @@ const initialState: NewsState = {
   totalPages: null,
   mobileMenuOpen: false,
   homepageOption: 'FEATURED',
-  homepagePrompt: true,
+  homepagePrompt: homepagePrompt,
   favorites: favorites,
   loading: false,
   error: null,
   hasMore: null,
   infiniteScrollPage: 1,
   infiniteHasMore: true,
-  latestNewsArticles: [],
+  latestNewsArticles: latestArt,
   infiniteLoading: false,
 };
 
@@ -86,6 +97,7 @@ export const newsSlice = createSlice({
     resetInfinite: (state) => {
       state.latestNewsArticles = [];
       state.infiniteLoading = false;
+      state.infiniteScrollPage = 1;
     },
     setInfiniteLoading: (state, action: PayloadAction<boolean>) => {
       state.infiniteLoading = action.payload;
@@ -110,7 +122,7 @@ export const newsSlice = createSlice({
     },
     removeFav: (state, action: PayloadAction<string>) => {
       state.favorites = state.favorites.filter(
-        (fav) => fav.id === action.payload
+        (fav) => fav.id !== action.payload
       );
     },
   },

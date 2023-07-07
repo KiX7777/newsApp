@@ -1,4 +1,4 @@
-import React from 'react';
+import  { useEffect } from 'react';
 import Sidebar from './Sidebar';
 import classes from './MobileMenu.module.css';
 import closemenu from '../assets/closemenu.svg';
@@ -13,6 +13,12 @@ const MobileMenu = () => {
   const handleClose = (): void => {
     dispatch(newsActions.closeMobileMenu());
   };
+
+  useEffect(() => {
+    open
+      ? document.body.classList.add('mobileOpen')
+      : document.body.classList.remove('mobileOpen');
+  }, [open]);
 
   return (
     <div

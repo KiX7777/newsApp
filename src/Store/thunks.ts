@@ -3,9 +3,7 @@ import { Article, GenericObj } from '../models';
 import { v4 as uuidv4 } from 'uuid';
 import { NewsState } from './newsSlice';
 
-const APIKEY = '1a0897a3733848d084ffe67fc0455dc8';
-const APIKEY2 = '1c12ddde47ea4719925f87b3dec3778e';
-const APIKEY3 = '2bc8881acf0f4c6f8629ab9dfb96beca';
+const APIKEY = 'bc7a8a8a654e475e8c77f692397f3d33';
 
 export const getNYFeatured = createAsyncThunk(
   'news/NYTIMES_Featured',
@@ -18,7 +16,6 @@ export const getNYFeatured = createAsyncThunk(
         throw new Error('Failed to fetch data.');
       }
       const data = await res.json();
-      console.log(data);
 
       const articles = data.results.map((art: GenericObj) => {
         const article: Article = {
@@ -40,10 +37,9 @@ export const getNYFeatured = createAsyncThunk(
           return a.date.localeCompare(b.date);
         })
         .reverse();
-    } catch (error) {
-      if (error instanceof Error) {
-        thunkAPI.rejectWithValue(error.message);
-      }
+    } catch (err) {
+      const error = err as Error;
+      return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
@@ -59,7 +55,7 @@ export const getByCategory = createAsyncThunk(
         {
           method: 'GET',
           headers: {
-            'x-api-key': APIKEY3,
+            'x-api-key': APIKEY,
           },
         }
       );
@@ -67,7 +63,6 @@ export const getByCategory = createAsyncThunk(
         throw new Error('Failed to fetch data.');
       }
       const data = await res.json();
-      console.log(data);
 
       const articles = data.articles.map((art: GenericObj) => {
         const article: Article = {
@@ -98,7 +93,6 @@ export const getSearch = createAsyncThunk(
   'news/search',
   async (query: string, thunkAPI) => {
     const { news } = thunkAPI.getState() as { news: NewsState };
-    // const query = news.searchQuery;
     const page = news.page;
 
     try {
@@ -107,7 +101,7 @@ export const getSearch = createAsyncThunk(
         {
           method: 'GET',
           headers: {
-            'x-api-key': APIKEY3,
+            'x-api-key': APIKEY,
           },
         }
       );
@@ -115,7 +109,6 @@ export const getSearch = createAsyncThunk(
         throw new Error('Failed to fetch data.');
       }
       const data = await res.json();
-      console.log(data);
 
       const articles = data.articles.map((art: GenericObj) => {
         const article: Article = {
@@ -155,7 +148,7 @@ export const getLatest = createAsyncThunk(
         {
           method: 'GET',
           headers: {
-            'x-api-key': APIKEY3,
+            'x-api-key': APIKEY,
           },
         }
       );
@@ -165,7 +158,6 @@ export const getLatest = createAsyncThunk(
       }
 
       const data = await res.json();
-      console.log(data);
 
       const articles: Article[] = data.articles.map((art: GenericObj) => {
         const article: Article = {
@@ -182,7 +174,6 @@ export const getLatest = createAsyncThunk(
       });
       sessionStorage.setItem('articles', JSON.stringify(articles));
       const totalPages = Math.ceil(data.totalResults / 6);
-      console.log(totalPages);
       return {
         articles: articles,
         totalPages: totalPages,

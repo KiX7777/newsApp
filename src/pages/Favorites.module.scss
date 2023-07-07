@@ -1,24 +1,27 @@
+@use '../assets/styles/mixins' as *;
+
 .favorites {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1.6rem;
+  @include flex($direction: column);
 
-  .notification {
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
+  gap: 1.6rem;
 
   .news {
     color: #1d1d1b;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-family: Inter;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px;
+    line-height: 2.4rem;
     letter-spacing: -0.153px;
+  }
+
+  .message {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.4rem;
   }
 
   .loader {
@@ -42,9 +45,12 @@
   }
 }
 @media screen and (width < 500px) {
-  section {
+  .favorites {
     order: 1;
 
+    .message {
+      font-size: 1.8rem;
+    }
     .loader {
       transform: translate(-50%, -50%) scale(1.5);
     }

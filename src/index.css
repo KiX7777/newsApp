@@ -9,10 +9,15 @@ body {
   min-height: 100dvh;
 }
 
+body.mobileOpen {
+  overflow: hidden;
+}
+
 html {
   font-size: 62.5%;
 }
-/* @font-face {
+
+@font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 100;
@@ -165,7 +170,6 @@ html {
     url('/src/assets/fonts/Inter-BlackItalic.woff') format('woff');
 }
 
-
 @font-face {
   font-family: 'Inter var';
   font-weight: 100 900;
@@ -181,4 +185,4 @@ html {
   font-style: italic;
   font-named-instance: 'Italic';
   src: url('/src/assets/fonts/Inter-italic.var.woff2') format('woff2');
-} */
+}

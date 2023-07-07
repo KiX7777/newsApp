@@ -1,24 +1,43 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../Store/store';
 import { Article } from '../models';
 import classes from './ArticlePage.module.css';
 import { newsActions } from '../Store/newsSlice';
-import FavoritesIcon from '../Components/FavoritesIcon';
-import LinkIcon from '../Components/LinkIcon';
+import FavoritesIcon from '../assets/icons/FavoritesIcon';
+import LinkIcon from '../assets/icons/LinkIcon';
+
 
 const ArticlePage = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const id = useLocation().pathname.slice(9);
   const favorites = useAppSelector((state) => state.news.favorites);
-  const isFav = favorites.find((fav) => fav.id === id);
-  const handleFav = () => {
-    isFav
-      ? dispatch(newsActions.removeFav('test'))
-      : dispatch(newsActions.addFav(article));
-  };
-
   const articles = useAppSelector((state) => state.news.articles);
-  const article = articles.find((art: Article) => art.id === id) as Article;
+  const latestCards = useAppSelector((state) => state.news.latestNewsArticles);
+  const isFav = favorites.find((fav) => fav.id === id);
+
+  let article: Article;
+  article = articles.find((art: Article) => art.id === id) as Article;
+  if (!article) {
+    article = favorites.find((art: Article) => art.id === id) as Article;
+    if (!article) {
+      article = latestCards.find((art: Article) => art.id === id) as Article;
+    }
+  }
+  const handleFav = () => {
+    if (isFav) {
+      const inArt = articles.find(
+        (art: Article) => art.id === isFav.id
+      ) as Article;
+      if (!inArt) {
+        navigate('/favorites');
+        dispatch(newsActions.removeFav(article.id));
+      }
+      dispatch(newsActions.removeFav(article.id));
+    } else {
+      dispatch(newsActions.addFav(article));
+    }
+  };
 
   return (
     <section className={classes.container}>
@@ -42,7 +61,9 @@ const ArticlePage = () => {
         </div>
       </header>
       <p>{article.abstract}</p>
-      <img src={article.images[0]} alt='Article' />
+      <div className={classes.image}>
+        <img src={article.images[0]} alt='Article' />
+      </div>
     </section>
   );
 };

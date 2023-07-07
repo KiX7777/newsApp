@@ -4,6 +4,7 @@ import classes from './SearchForm.module.css';
 import { useAppDispatch } from '../Store/store';
 import { newsActions } from '../Store/newsSlice';
 import { useNavigate } from 'react-router-dom';
+
 const SearchForm = () => {
   const navigate = useNavigate();
   const searchref = useRef<HTMLInputElement>(null);

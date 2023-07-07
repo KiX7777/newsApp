@@ -6,11 +6,11 @@
 
   .news {
     color: #1d1d1b;
-    font-size: 18px;
+    font-size: 1.8rem;
     font-family: Inter;
     font-style: normal;
     font-weight: 700;
-    line-height: 24px;
+    line-height: 2.4rem;
     letter-spacing: -0.153px;
   }
 
@@ -35,7 +35,7 @@
   }
 }
 @media screen and (width < 500px) {
-  section {
+  .search {
     order: 1;
 
     .loader {

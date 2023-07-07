@@ -39,8 +39,11 @@
   width: 0.5rem;
 }
 .container .cardsContainer::-webkit-scrollbar-thumb {
-  background-color: #bb1e1e;
+  background-color: rgba(187, 30, 30, 0.4);
   border-radius: 1rem;
+}
+.container .cardsContainer::-webkit-scrollbar-thumb:hover {
+  background-color: #bb1e1e;
 }
 .container .ctaContainer {
   display: flex;
@@ -80,6 +83,8 @@
   .container {
     grid-column: unset;
     display: none;
+    grid-row: unset;
+    height: 60vh;
   }
   .container .title p {
     font-weight: 600;

@@ -1,4 +1,3 @@
-import React from 'react';
 import classes from './HomepagePicker.module.css';
 import { useAppDispatch, useAppSelector } from '../Store/store';
 import { newsActions } from '../Store/newsSlice';
