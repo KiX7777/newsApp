@@ -1,7 +1,9 @@
 npm i
 npm start
 
-!! Prilikom promjene kategorije s Home na General zbog Strict Modea se dvaput fetchaju podaci, ako se isključi onda je normalno sve.
+!! Prilikom promjene kategorije s Home na General zbog Strict Modea se dvaput fetchaju podaci, ako se isključi onda je normalno sve. !!
+
+!! Strict mode također "breaka" infinite scroll jer se odmah dva puta fetchaju podaci na loadu !!
 
 Dodana je stranica za svaki članak, koja se otvara prilikom klika na karticu.
 Za state management je korišten Redux, a u local storageu su se neki podaci iz statea pohranili kako bi se na reloadu stranice zadržao state (npr. ako se otvori stranica članka i reloada, state bi se obrisao na resetu i stranica bi failala, ovako se iz statea to povuče); nešto slično Redux Persistu

@@ -18,7 +18,6 @@ const ArticleCard = ({ author, title, section, image, id }: CardProps) => {
       className={classes.card}
       onClick={(): void => {
         navigate(`/article/${id}`);
-        console.log(id);
       }}
     >
       <div className={classes.photo}>
