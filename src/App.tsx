@@ -1,4 +1,3 @@
-import './App.css';
 import store, { useAppDispatch, useAppSelector } from './Store/store';
 import { useEffect } from 'react';
 import {
@@ -64,7 +63,6 @@ function App() {
         });
       }
     }
-    return () => {};
   }, [page, setSearchParams, dispatch, searchParams, location.pathname]);
 
   return (

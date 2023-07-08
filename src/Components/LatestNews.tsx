@@ -16,7 +16,6 @@ const LatestNews = () => {
     (state) => state.news.latestNewsArticles
   );
   const page = useAppSelector((state) => state.news.infiniteScrollPage);
-  const error = useAppSelector((state) => state.news.error);
   const hasMore = useAppSelector((state) => state.news.infiniteHasMore);
   const observer = useRef<IntersectionObserver | null>(null);
   const cardref = useRef<HTMLDivElement>(null);
@@ -91,9 +90,7 @@ const LatestNews = () => {
         <img src={topicon} alt='alert icon for latest news' />
         <p>Latest news</p>
       </div>
-      <div className={classes.cardsContainer}>
-        {!error ? cards : <h1>{error}</h1>}
-      </div>
+      <div className={classes.cardsContainer}>{cards}</div>
       <div className={classes.ctaContainer}>
         <a href='/'>See all news</a>
         <img src={righticon} alt='right chevron' />

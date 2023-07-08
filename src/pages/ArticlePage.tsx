@@ -6,7 +6,6 @@ import { newsActions } from '../Store/newsSlice';
 import FavoritesIcon from '../assets/icons/FavoritesIcon';
 import LinkIcon from '../assets/icons/LinkIcon';
 
-
 const ArticlePage = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

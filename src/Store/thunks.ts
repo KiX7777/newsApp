@@ -24,14 +24,14 @@ export const getNYFeatured = createAsyncThunk(
           date: art.published_date,
           author: art.byline,
           id: uuidv4(),
-          images: art.multimedia.map((img: GenericObj) => img.url),
+          images: art.multimedia
+            ? art.multimedia.map((img: GenericObj) => img.url)
+            : ['./src/assets/noimg.svg.webp'],
           section: art.section,
           title: art.title,
         };
         return article;
       });
-
-      sessionStorage.setItem('articles', JSON.stringify(articles));
       return articles
         .sort((a: Article, b: Article) => {
           return a.date.localeCompare(b.date);
@@ -77,7 +77,7 @@ export const getByCategory = createAsyncThunk(
         };
         return article;
       });
-      sessionStorage.setItem('articles', JSON.stringify(articles));
+
       const totalPages = Math.ceil(data.totalResults / 20);
       return {
         articles: articles,
@@ -123,7 +123,7 @@ export const getSearch = createAsyncThunk(
         };
         return article;
       });
-      sessionStorage.setItem('articles', JSON.stringify(articles));
+
       const totalPages = Math.ceil(data.totalResults / 20);
       return {
         articles: articles,
@@ -158,7 +158,6 @@ export const getLatest = createAsyncThunk(
       }
 
       const data = await res.json();
-      console.log(data);
 
       const articles: Article[] = data.articles.map((art: GenericObj) => {
         const article: Article = {
@@ -173,7 +172,7 @@ export const getLatest = createAsyncThunk(
         };
         return article;
       });
-      sessionStorage.setItem('articles', JSON.stringify(articles));
+
       const totalPages = Math.ceil(data.totalResults / 6);
       return {
         articles: articles,

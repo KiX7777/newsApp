@@ -57,7 +57,7 @@ const initialState: NewsState = {
   homepagePrompt: homepagePrompt,
   favorites: favorites,
   loading: false,
-  error: null,
+  error: '',
   hasMore: null,
   infiniteScrollPage: 1,
   infiniteHasMore: true,
