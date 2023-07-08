@@ -158,6 +158,7 @@ export const getLatest = createAsyncThunk(
       }
 
       const data = await res.json();
+      console.log(data);
 
       const articles: Article[] = data.articles.map((art: GenericObj) => {
         const article: Article = {

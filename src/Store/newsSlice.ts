@@ -129,7 +129,7 @@ export const newsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getNYFeatured.pending, (state) => {
       state.loading = true;
-      state.error = null;
+      state.error = '';
     });
     builder.addCase(getNYFeatured.fulfilled, (state, action) => {
       state.loading = false;
@@ -141,13 +141,14 @@ export const newsSlice = createSlice({
     });
     builder.addCase(getByCategory.pending, (state) => {
       state.loading = true;
-      state.error = null;
+      state.error = '';
     });
     builder.addCase(getByCategory.fulfilled, (state, action) => {
       state.loading = false;
       state.articles = action.payload?.articles;
       state.totalPages = action.payload!.totalPages;
       state.hasMore = state.page !== action.payload?.totalPages;
+      state.error = '';
     });
     builder.addCase(getByCategory.rejected, (state, action) => {
       state.loading = false;
@@ -155,13 +156,14 @@ export const newsSlice = createSlice({
     });
     builder.addCase(getSearch.pending, (state) => {
       state.loading = true;
-      state.error = null;
+      state.error = '';
     });
     builder.addCase(getSearch.fulfilled, (state, action) => {
       state.loading = false;
       state.articles = action.payload?.articles;
       state.totalPages = action.payload!.totalPages;
       state.hasMore = state.page !== action.payload?.totalPages;
+      state.error = '';
     });
     builder.addCase(getSearch.rejected, (state, action) => {
       state.loading = false;
@@ -169,7 +171,7 @@ export const newsSlice = createSlice({
     });
     builder.addCase(getLatest.pending, (state) => {
       state.infiniteLoading = true;
-      state.error = null;
+      state.error = '';
     });
     builder.addCase(getLatest.fulfilled, (state, action) => {
       state.infiniteLoading = false;
@@ -179,6 +181,7 @@ export const newsSlice = createSlice({
       ];
       state.infiniteHasMore =
         state.infiniteScrollPage !== action.payload?.totalPages;
+      state.error = '';
     });
     builder.addCase(getLatest.rejected, (state, action) => {
       state.infiniteLoading = false;
