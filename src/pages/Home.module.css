@@ -29,6 +29,13 @@
   grid-template-columns: repeat(3, 1fr);
 }
 
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
 @media screen and (width > 1800px) {
   .articleContainer {
     grid-template-columns: repeat(4, 1fr);

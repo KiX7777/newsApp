@@ -7,6 +7,7 @@ import { useEffect, useCallback, useRef } from 'react';
 import LatestCard from './LatestCard';
 import { getLatest } from '../Store/thunks';
 import { newsActions } from '../Store/newsSlice';
+import { useInfiniteQuery } from '@tanstack/react-query';
 
 const LatestNews = () => {
   const dispatch = useAppDispatch();

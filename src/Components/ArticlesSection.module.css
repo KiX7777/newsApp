@@ -1,3 +1,10 @@
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+}
+
 .articles {
   display: flex;
   justify-content: initial;
@@ -15,12 +22,6 @@
   line-height: 2.4rem;
   letter-spacing: -0.153px;
   text-transform: capitalize;
-}
-.articles .loader {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%) scale(2);
 }
 
 .articleContainer {

@@ -1,5 +1,11 @@
 @use '../assets/styles/mixins' as *;
 
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(1.5);
+}
 .articles {
   @include flex($direction: column);
   flex: 1;
@@ -14,13 +20,6 @@
     line-height: 2.4rem;
     letter-spacing: -0.153px;
     text-transform: capitalize;
-  }
-
-  .loader {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%) scale(2);
   }
 }
 .articleContainer {
