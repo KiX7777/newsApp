@@ -1,26 +1,27 @@
 import classes from './LatestCard.module.css';
 import { forwardRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 interface CardProps {
   time: string;
   title: string;
-  id: string;
+  url: string;
 }
 
-const LatestCard = forwardRef<HTMLDivElement, CardProps>((props, ref) => {
-  const navigate = useNavigate();
+const LatestCard = forwardRef<HTMLAnchorElement, CardProps>((props, ref) => {
   return (
-    <div
+    <Link
       ref={ref}
       className={classes.card}
-      onClick={(): void => {
-        navigate(`/article/${props.id}`);
-      }}
+      // onClick={(): void => {
+      //   navigate(`${props.url}`);
+      // }}
+      to={props.url}
+      target='_blank'
     >
       <small>{`${new Date(props.time).toLocaleTimeString()}`}</small>
       <h4>{props.title}</h4>
-    </div>
+    </Link>
   );
 });
 

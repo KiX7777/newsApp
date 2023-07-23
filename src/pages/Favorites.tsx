@@ -15,8 +15,9 @@ const Favorites = () => {
       author={art.author}
       section={art.section}
       title={art.title}
-      image={art.images[0]}
+      image={`http://www.nytimes.com/${art.images}`}
       id={art.id}
+      uri={art.uri!}
     />
   ));
 

@@ -1,5 +1,5 @@
 import store, { useAppDispatch, useAppSelector } from './Store/store';
-import { useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import {
   Routes,
   Route,
@@ -11,9 +11,11 @@ import Home from './pages/Home';
 import Layout from './UI/Layout';
 import ArticlesSection from './Components/ArticlesSection';
 import Search from './pages/Search';
-import ArticlePage from './pages/ArticlePage';
-import Favorites from './pages/Favorites';
 import NotFound from './pages/NotFound';
+import { GridLoader } from 'react-spinners';
+
+const ArticlePage = lazy(() => import('./pages/ArticlePage'));
+const Favorites = lazy(() => import('./pages/Favorites'));
 
 function App() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -71,15 +73,29 @@ function App() {
         <Route path='/' element={<Layout />}>
           <Route path='/' element={<Navigate to='/home' replace />} />
           <Route path='home' element={<Home />} />
-          <Route path='general' element={<ArticlesSection />} />
+          <Route path='education' element={<ArticlesSection />} />
           <Route path='business' element={<ArticlesSection />} />
           <Route path='health' element={<ArticlesSection />} />
           <Route path='science' element={<ArticlesSection />} />
           <Route path='sports' element={<ArticlesSection />} />
           <Route path='technology' element={<ArticlesSection />} />
           <Route path='search/:query' element={<Search />} />
-          <Route path='article/:id' element={<ArticlePage />} />
-          <Route path='favorites' element={<Favorites />} />
+          <Route
+            path='article/:id'
+            element={
+              <Suspense fallback={<GridLoader />}>
+                <ArticlePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path='favorites'
+            element={
+              <Suspense fallback={<GridLoader />}>
+                <Favorites />
+              </Suspense>
+            }
+          />
           <Route path='*' element={<NotFound />} />
         </Route>
       </Routes>

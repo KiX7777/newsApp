@@ -4,11 +4,24 @@ import classes from './SearchForm.module.css';
 import { useAppDispatch } from '../Store/store';
 import { newsActions } from '../Store/newsSlice';
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { getSearch } from '../service/search';
 
 const SearchForm = () => {
   const navigate = useNavigate();
   const searchref = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
+
+  // const {
+  //   isLoading,
+  //   data,
+  //   error: err,
+  // } = useQuery({
+  //   queryKey: ['search'],
+  //   queryFn: () => {
+  //     return getSearch();
+  //   },
+  // });
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

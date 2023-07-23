@@ -7,6 +7,7 @@ export interface Article {
   abstract: string;
   images: string[];
   id: string;
+  uri?: string;
 }
 
 export type GenericObj = Record<string, any>;

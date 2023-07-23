@@ -2,59 +2,113 @@ import React from 'react';
 import classes from './LatestNews.module.css';
 import topicon from '../assets/top.svg';
 import righticon from '../assets/right.svg';
-import { useAppDispatch, useAppSelector } from '../Store/store';
-import { useEffect, useCallback, useRef } from 'react';
+import { useAppSelector } from '../Store/store';
+import { useCallback, useRef } from 'react';
 import LatestCard from './LatestCard';
-import { getLatest } from '../Store/thunks';
-import { newsActions } from '../Store/newsSlice';
+
 import { useInfiniteQuery } from '@tanstack/react-query';
+import { infiniteQuery } from '../service/infiniteQuery';
+import { GridLoader } from 'react-spinners';
 
 const LatestNews = () => {
-  const dispatch = useAppDispatch();
   const isActive =
     useAppSelector((state) => state.news.homepageOption) === 'LATEST';
-  const latestArticles = useAppSelector(
-    (state) => state.news.latestNewsArticles
-  );
-  const page = useAppSelector((state) => state.news.infiniteScrollPage);
-  const hasMore = useAppSelector((state) => state.news.infiniteHasMore);
-  const observer = useRef<IntersectionObserver | null>(null);
-  const cardref = useRef<HTMLDivElement>(null);
-  const loading = useAppSelector((state) => state.news.infiniteLoading);
 
-  const handleObserver: IntersectionObserverCallback = useCallback(
-    (entries) => {
-      const target = entries[0];
-      if (target.isIntersecting && hasMore) {
-        dispatch(newsActions.incrementInfinitePage());
+  const {
+    isLoading,
+    error,
+    data,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
+    queryKey: ['infinite'],
+    queryFn: ({ pageParam = 1 }) => infiniteQuery(pageParam),
+    staleTime: 60 * 1000 * 5,
+    getNextPageParam: (lastPage) => {
+      if (lastPage?.hasMore) {
+        return lastPage.next;
       }
+      return undefined;
     },
-    [dispatch, hasMore]
-  );
-  useEffect(() => {
-    if (cardref.current) {
-      observer.current = new IntersectionObserver(handleObserver, {
-        threshold: 1,
-      });
-      observer.current.observe(cardref.current);
-    }
+  });
 
-    return () => {
-      if (observer.current) {
-        observer.current.disconnect();
+  const intObserver = useRef<IntersectionObserver>();
+
+  const lastArticleRef = useCallback(
+    (article: HTMLAnchorElement) => {
+      if (isFetchingNextPage) {
+        return;
       }
-    };
-  }, [latestArticles, handleObserver]);
 
-  const cards = latestArticles.map((art, idx) => {
-    if (latestArticles.length === idx + 1) {
+      if (intObserver.current) {
+        intObserver.current.disconnect();
+      }
+
+      intObserver.current = new IntersectionObserver(
+        (articles) => {
+          if (articles[0].isIntersecting && hasNextPage) {
+            fetchNextPage();
+          }
+        },
+        { threshold: 1 }
+      );
+      if (article) intObserver.current.observe(article);
+    },
+    [hasNextPage, isFetchingNextPage, fetchNextPage]
+  );
+
+  // const handleObserver: IntersectionObserverCallback = useCallback(
+  //   (entries) => {
+  //     const target = entries[0];
+  //     console.log(target);
+  //     if (target.isIntersecting && hasNextPage) {
+  //       console.log('intersecting');
+  //       // dispatch(newsActions.incrementInfinitePage());
+  //       fetchNextPage();
+  //     }
+  //   },
+  //   [fetchNextPage, hasNextPage]
+  // );
+  // useEffect(() => {
+  //   if (cardref.current) {
+  //     observer.current = new IntersectionObserver(handleObserver, {
+  //       threshold: 1,
+  //     });
+  //     observer.current.observe(cardref.current);
+  //   }
+
+  //   return () => {
+  //     if (observer.current) {
+  //       observer.current.disconnect();
+  //     }
+  //   };
+  // }, [latestArticles, handleObserver]);
+
+  let cards;
+  let articles: any[] = [];
+
+  data?.pages.forEach((page) => {
+    const arts = page?.articles;
+    articles = [...articles, ...arts!];
+  });
+
+  if (isLoading) {
+    return <GridLoader />;
+  }
+  if (error && error instanceof Error) return <h1>{error.message}</h1>;
+
+  console.log(articles);
+
+  cards = articles.map((art, idx) => {
+    if (articles.length === idx + 1) {
       return (
         <LatestCard
-          ref={cardref}
+          ref={lastArticleRef}
           time={art.date}
           title={art.title}
           key={art.id}
-          id={art.id}
+          url={art.url}
         />
       );
     } else {
@@ -63,21 +117,11 @@ const LatestNews = () => {
           time={art.date}
           title={art.title}
           key={art.id}
-          id={art.id}
+          url={art.url}
         />
       );
     }
   });
-
-  useEffect(() => {
-    let ignore = false;
-    if (!ignore) {
-      dispatch(getLatest());
-    }
-    return () => {
-      ignore = true;
-    };
-  }, [dispatch, page]);
 
   return (
     <aside
@@ -90,12 +134,19 @@ const LatestNews = () => {
       <div className={classes.title}>
         <img src={topicon} alt='alert icon for latest news' />
         <p>Latest news</p>
+        <button
+          onClick={() => {
+            fetchNextPage();
+          }}
+        >
+          next
+        </button>
       </div>
       <div className={classes.cardsContainer}>{cards}</div>
       <div className={classes.ctaContainer}>
         <a href='/'>See all news</a>
         <img src={righticon} alt='right chevron' />
-        {loading && <p>Loading...</p>}{' '}
+        {isFetchingNextPage && <p>Loading...</p>}{' '}
       </div>
     </aside>
   );

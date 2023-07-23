@@ -7,6 +7,7 @@
   flex-direction: column;
   padding: 2.4rem;
   flex: 1;
+  position: relative;
 }
 .container .header {
   display: flex;
@@ -16,17 +17,26 @@
   width: 100%;
   margin-bottom: 3.2rem;
 }
-.container .header .mainInfo h1 {
+.container .header .back {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+}
+.container .mainInfo h1 {
   font-size: 3.2rem;
 }
-.container .header .mainInfo small {
+.container .mainInfo small {
   font-size: 1rem;
 }
-.container p {
+
+p {
   font-size: 1.6rem;
   margin-bottom: 3.2rem;
 }
-.container img {
+
+img {
   max-width: 60rem;
   width: 100%;
   height: 100%;
@@ -34,19 +44,20 @@
      object-fit: cover;
   border-radius: 0.8rem;
 }
-.container .btns {
+
+.btns {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 0.5rem;
 }
-.container .btns a {
+.btns a {
   text-decoration: underline;
   font-size: 1.4rem;
   color: black;
 }
-.container .btns .fav {
+.btns .fav {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -57,15 +68,22 @@
   border: none;
   cursor: pointer;
 }
-.container .btns .fav svg {
+.btns .fav svg {
   width: 100%;
   height: 100%;
 }
-.container .btns .fav svg path {
+.btns .fav svg path {
   transition: fill 400ms ease;
 }
-.container .btns .fav.add svg path {
+.btns .fav.add svg path {
   fill: #bb1e1e;
+}
+
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(2);
 }
 
 @media screen and (width < 500px) {
@@ -102,5 +120,8 @@
 @media screen and (width < 500px) {
   .container {
     gap: 1rem;
+  }
+  .container .back {
+    right: 0;
   }
 }/*# sourceMappingURL=ArticlePage.module.css.map */

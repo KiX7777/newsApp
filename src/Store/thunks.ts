@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { NewsState } from './newsSlice';
 
 const APIKEY = 'a32a159ec4bf4ba9ad86a81b74194867';
-
+// https://api.nytimes.com/svc/search/v2/articlesearch.json?q=messi&api-key=6PwsEZoKesC2JSVylxfRq7GOtRHpuxB4
 export const getNYFeatured = createAsyncThunk(
   'news/NYTIMES_Featured',
   async (_, thunkAPI) => {
@@ -51,6 +51,8 @@ export const getByCategory = createAsyncThunk(
     const page = news.page;
     try {
       const res = await fetch(
+        // await fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?fq=news_desk:("Sports")&sort=newest&api-key=6PwsEZoKesC2JSVylxfRq7GOtRHpuxB4`).then(res=> res.json())
+
         `https://newsapi.org/v2/top-headlines?country=us&category=${category}&page=${page}`,
         {
           method: 'GET',

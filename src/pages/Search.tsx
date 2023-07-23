@@ -2,44 +2,60 @@ import React from 'react';
 import classes from './Search.module.css';
 
 import ArticleCard from '../Components/ArticleCard';
-import { useAppDispatch, useAppSelector } from '../Store/store';
-import { useEffect } from 'react';
+import { useAppSelector } from '../Store/store';
 import { GridLoader } from 'react-spinners';
-import { Article } from '../models';
-import { useLocation } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import PaginationBtns from '../Components/PaginationBtns';
-import { getSearch } from '../Store/thunks';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { getSearch } from '../service/search';
 
 const Search = () => {
-  const dispatch = useAppDispatch();
-  const articles = useAppSelector((state) => state.news.articles);
   const loading = useAppSelector((state) => state.news.loading);
   const page = useAppSelector((state) => state.news.page);
   const searchParam = useLocation().pathname.slice(8);
   const error = useAppSelector((state) => state.news.error);
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    let ignore = false;
+  const {
+    isLoading,
+    data,
+    error: err,
+  } = useQuery({
+    queryKey: ['search', searchParam, page],
+    staleTime: 3_600_000,
+    queryFn: () => {
+      return getSearch(searchParam, page);
+    },
+  });
+  const preFetch = (page: number) => {
+    queryClient.prefetchQuery({
+      queryKey: ['search', searchParam, page],
+      queryFn: () => {
+        return getSearch(searchParam, page);
+      },
+      staleTime: 60 * 1000 * 5 /* 5m */,
+    });
+  };
+  let cards;
 
-    if (!ignore) {
-      dispatch(getSearch(searchParam));
-    }
-
-    return () => {
-      ignore = true;
-    };
-  }, [dispatch, page, searchParam]);
-
-  const cards = articles.map((art: Article) => (
+  cards = data?.articles.map((art: any) => (
     <ArticleCard
       key={art.id}
       author={art.author}
       section={art.section}
       title={art.title}
-      image={art.images[0]}
+      image={`http://www.nytimes.com/${art?.images}`}
+      uri={art.uri}
       id={art.id}
     />
   ));
+
+  if (isLoading) {
+    return <GridLoader color='#BB1E1E' className={classes.loader} />;
+  }
+  if (err) {
+    if (err instanceof Error) return <Navigate to='/' />;
+  }
 
   return (
     <section className={classes.search}>
@@ -48,7 +64,7 @@ const Search = () => {
         {loading ? (
           <GridLoader color='#BB1E1E' className={classes.loader} />
         ) : !error ? (
-          articles.length > 0 ? (
+          data?.articles.length > 0 ? (
             !error && cards
           ) : (
             <h1>No results found</h1>
@@ -57,7 +73,9 @@ const Search = () => {
           <h1>{error}</h1>
         )}
       </main>
-      {!loading && <PaginationBtns />}
+      {!loading && (
+        <PaginationBtns hasMore={data?.hasMore!} prefetch={preFetch} />
+      )}
     </section>
   );
 };

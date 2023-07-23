@@ -2,7 +2,7 @@ import classes from './Sidebar.module.css';
 
 import { NavLink } from 'react-router-dom';
 import HomeBtn from '../assets/icons/HomeBtn';
-import GeneralBtn from '../assets/icons/GeneralBtn';
+import EnterIcon from '../assets/icons/GeneralBtn';
 import BusinessBtn from '../assets/icons/BusinessBtn';
 import HealthBtn from '../assets/icons/HealthBtn';
 import ScienceBtn from '../assets/icons/ScienceBtn';
@@ -42,16 +42,6 @@ const Sidebar = () => {
         Home
       </NavLink>
       <NavLink
-        to={'/general'}
-        onClick={handleClick}
-        className={({ isActive }) =>
-          isActive ? `${classes.active} ${classes.navBtn}` : `${classes.navBtn}`
-        }
-      >
-        <GeneralBtn />
-        General
-      </NavLink>
-      <NavLink
         onClick={handleClick}
         className={({ isActive }) =>
           isActive ? `${classes.active} ${classes.navBtn}` : `${classes.navBtn}`
@@ -60,6 +50,16 @@ const Sidebar = () => {
       >
         <BusinessBtn />
         Business
+      </NavLink>
+      <NavLink
+        to={'/education'}
+        onClick={handleClick}
+        className={({ isActive }) =>
+          isActive ? `${classes.active} ${classes.navBtn}` : `${classes.navBtn}`
+        }
+      >
+        <EnterIcon />
+        Education
       </NavLink>
       <NavLink
         onClick={handleClick}

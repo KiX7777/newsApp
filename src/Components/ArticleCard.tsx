@@ -8,16 +8,16 @@ interface CardProps {
   section: string;
   image: string;
   id: string;
+  uri: string;
 }
 
-const ArticleCard = ({ author, title, section, image, id }: CardProps) => {
+const ArticleCard = ({ author, title, section, image, id, uri }: CardProps) => {
   const navigate = useNavigate();
-
   return (
     <div
       className={classes.card}
       onClick={(): void => {
-        navigate(`/article/${id}`);
+        navigate(`/article/${uri.slice(14)}`);
       }}
     >
       <div className={classes.photo}>

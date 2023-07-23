@@ -3,11 +3,10 @@ import ArticleCard from '../Components/ArticleCard';
 import LatestNews from '../Components/LatestNews';
 import { useAppDispatch, useAppSelector } from '../Store/store';
 import { useEffect } from 'react';
-import { getNYFeatured } from '../Store/thunks';
 import { GridLoader } from 'react-spinners';
-import { Article } from '../models';
 import { newsActions } from '../Store/newsSlice';
 import { useQuery } from '@tanstack/react-query';
+import { getData } from '../service/NYTimes';
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -22,17 +21,9 @@ const Home = () => {
     data: arts,
   } = useQuery({
     queryKey: ['articles'],
-    staleTime: 60 * 1000 * 5 /* 5m */,
-    queryFn: async () => {
-      const res = await fetch(
-        'https://api.nytimes.com/svc/topstories/v2/home.json?api-key=6PwsEZoKesC2JSVylxfRq7GOtRHpuxB4'
-      );
-      if (!res.ok) {
-        throw new Error('Failed to fetch data.');
-      }
 
-      return res.json();
-    },
+    staleTime: 60 * 1000 * 5 /* 5m */,
+    queryFn: getData,
 
     onSuccess: () => {
       console.log('ok');
@@ -45,7 +36,6 @@ const Home = () => {
   useEffect(() => {
     let ignore = false;
     if (!ignore) {
-      dispatch(getNYFeatured());
       dispatch(newsActions.setPage(1));
     }
     return () => {
@@ -59,27 +49,15 @@ const Home = () => {
 
   let cards;
 
-  // if (articles) {
-  //   cards = articles.map((art: Article) => (
-  //     <ArticleCard
-  //       key={art.id}
-  //       author={art.author}
-  //       section={art.section}
-  //       title={art.title}
-  //       image={art.images[0]}
-  //       id={art.id}
-  //     />
-  //   ));
-  // }
-
-  cards = arts?.results?.map((art: any) => (
+  cards = arts?.map((art: any) => (
     <ArticleCard
-      key={art.updated_date + art.byline}
-      author={art.byline}
+      key={art.id}
+      author={art.author}
       section={art.section}
       title={art.title}
-      image={art.multimedia[0].url}
-      id={art.updated_date}
+      image={art.images[0]}
+      uri={art.uri}
+      id={art.id}
     />
   ));
 
