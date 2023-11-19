@@ -79,7 +79,7 @@ const Home = () => {
           cards
         ) : null}
         {error && <h1>{error}</h1>}
-        <LatestNews />
+        {/* <LatestNews /> */}
       </main>
     </section>
   );
