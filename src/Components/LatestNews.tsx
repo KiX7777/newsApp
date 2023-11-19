@@ -11,27 +11,20 @@ import { infiniteQuery } from '../service/infiniteQuery';
 import { GridLoader } from 'react-spinners';
 
 const LatestNews = () => {
-  const isActive =
-    useAppSelector((state) => state.news.homepageOption) === 'LATEST';
+  const isActive = useAppSelector((state) => state.news.homepageOption) === 'LATEST';
 
-  const {
-    isLoading,
-    error,
-    data,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useInfiniteQuery({
-    queryKey: ['infinite'],
-    queryFn: ({ pageParam = 1 }) => infiniteQuery(pageParam),
-    staleTime: 60 * 1000 * 5,
-    getNextPageParam: (lastPage) => {
-      if (lastPage?.hasMore) {
-        return lastPage.next;
-      }
-      return undefined;
-    },
-  });
+  const { isLoading, error, data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+    useInfiniteQuery({
+      queryKey: ['infinite'],
+      queryFn: ({ pageParam = 1 }) => infiniteQuery(pageParam),
+      staleTime: 60 * 1000 * 5,
+      getNextPageParam: (lastPage) => {
+        if (lastPage?.hasMore) {
+          return lastPage.next;
+        }
+        return undefined;
+      },
+    });
 
   const intObserver = useRef<IntersectionObserver>();
 
@@ -51,11 +44,11 @@ const LatestNews = () => {
             fetchNextPage();
           }
         },
-        { threshold: 1 }
+        { threshold: 1 },
       );
       if (article) intObserver.current.observe(article);
     },
-    [hasNextPage, isFetchingNextPage, fetchNextPage]
+    [hasNextPage, isFetchingNextPage, fetchNextPage],
   );
 
   // const handleObserver: IntersectionObserverCallback = useCallback(
@@ -112,35 +105,15 @@ const LatestNews = () => {
         />
       );
     } else {
-      return (
-        <LatestCard
-          time={art.date}
-          title={art.title}
-          key={art.id}
-          url={art.url}
-        />
-      );
+      return <LatestCard time={art.date} title={art.title} key={art.id} url={art.url} />;
     }
   });
 
   return (
-    <aside
-      className={
-        isActive
-          ? `${classes.container} ${classes.active}`
-          : `${classes.container}`
-      }
-    >
+    <aside className={isActive ? `${classes.container} ${classes.active}` : `${classes.container}`}>
       <div className={classes.title}>
         <img src={topicon} alt='alert icon for latest news' />
         <p>Latest news</p>
-        <button
-          onClick={() => {
-            fetchNextPage();
-          }}
-        >
-          next
-        </button>
       </div>
       <div className={classes.cardsContainer}>{cards}</div>
       <div className={classes.ctaContainer}>

@@ -10,7 +10,7 @@ import { getData } from '../service/NYTimes';
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const articles = useAppSelector((state) => state.news.articles);
+  // const articles = useAppSelector((state) => state.news.articles);
   const loading = useAppSelector((state) => state.news.loading);
   const option = useAppSelector((state) => state.news.homepageOption);
   const error = useAppSelector((state) => state.news.error);

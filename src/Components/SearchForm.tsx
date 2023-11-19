@@ -4,8 +4,6 @@ import classes from './SearchForm.module.css';
 import { useAppDispatch } from '../Store/store';
 import { newsActions } from '../Store/newsSlice';
 import { useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { getSearch } from '../service/search';
 
 const SearchForm = () => {
   const navigate = useNavigate();

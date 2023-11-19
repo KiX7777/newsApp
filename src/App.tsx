@@ -1,12 +1,6 @@
 import store, { useAppDispatch, useAppSelector } from './Store/store';
 import { Suspense, lazy, useEffect } from 'react';
-import {
-  Routes,
-  Route,
-  Navigate,
-  useSearchParams,
-  useLocation,
-} from 'react-router-dom';
+import { Routes, Route, Navigate, useSearchParams, useLocation } from 'react-router-dom';
 import Home from './pages/Home';
 import Layout from './UI/Layout';
 import ArticlesSection from './Components/ArticlesSection';
@@ -25,24 +19,15 @@ function App() {
 
   useEffect(() => {
     const handleChange = (): void => {
-      localStorage.setItem(
-        'favorites',
-        JSON.stringify(store.getState().news.favorites)
-      );
+      localStorage.setItem('favorites', JSON.stringify(store.getState().news.favorites));
       if (store.getState().news.articles) {
-        localStorage.setItem(
-          'articles',
-          JSON.stringify(store.getState().news.articles)
-        );
+        localStorage.setItem('articles', JSON.stringify(store.getState().news.articles));
       }
       localStorage.setItem(
         'latestArticles',
-        JSON.stringify(store.getState().news.latestNewsArticles)
+        JSON.stringify(store.getState().news.latestNewsArticles),
       );
-      localStorage.setItem(
-        'homepagePrompt',
-        JSON.stringify(store.getState().news.homepagePrompt)
-      );
+      localStorage.setItem('homepagePrompt', JSON.stringify(store.getState().news.homepagePrompt));
       localStorage.setItem('page', JSON.stringify(store.getState().news.page));
     };
 

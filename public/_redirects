@@ -1,1 +1,5 @@
+/infinite/* /.netlify/functions/infinite 200
+/latest/* /.netlify/functions/latest 200
+/search/* /.netlify/functions/search 200
+
 /* /index.html 200
