@@ -18,6 +18,8 @@ exports.handler = async (event) => {
       },
     );
 
+    console.log(response);
+
     const data = await response.json();
     const articles: any = data.articles.map((art: Record<string, any>) => {
       const article: any = {
