@@ -19,8 +19,8 @@ exports.handler = async (event) => {
 
     const data = await response.json();
 
-    const articles = data.articles.map((art: any) => {
-      const article: any = {
+    const articles = data.articles.map((art) => {
+      const article = {
         url: art.url,
         abstract: art.description,
         date: art.publishedAt,
@@ -42,7 +42,7 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ returnObj }),
+      body: JSON.stringify(returnObj),
       headers: {
         'Access-Control-Allow-Origin': '*',
       },

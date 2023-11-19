@@ -2,7 +2,7 @@
 import { v4 as uuidv4 } from 'uuid';
 // eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
 const axios = require('axios');
-
+const APIKEY = 'a32a159ec4bf4ba9ad86a81b74194867';
 // eslint-disable-next-line no-undef
 exports.handler = async (event) => {
   const { queryStringParameters } = event;
@@ -13,7 +13,7 @@ exports.handler = async (event) => {
       `https://newsapi.org/v2/top-headlines?country=us&page=${page}&pageSize=6`,
       {
         headers: {
-          'x-api-key': 'a32a159ec4bf4ba9ad86a81b74194867',
+          'x-api-key': APIKEY,
         },
       },
     );
@@ -21,8 +21,8 @@ exports.handler = async (event) => {
     console.log(response);
 
     const data = await response.json();
-    const articles: any = data.articles.map((art: Record<string, any>) => {
-      const article: any = {
+    const articles = data.articles.map((art) => {
+      const article = {
         url: art.url,
         abstract: art.description,
         date: art.publishedAt,
@@ -48,7 +48,7 @@ exports.handler = async (event) => {
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ data: returnData }),
+      body: JSON.stringify(returnData),
       headers: {
         'Access-Control-Allow-Origin': '*',
       },

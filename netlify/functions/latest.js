@@ -1,8 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
-const APIKEY = 'a32a159ec4bf4ba9ad86a81b74194867';
 
 const axios = require('axios');
-
+const APIKEY = 'a32a159ec4bf4ba9ad86a81b74194867';
 exports.handler = async (event) => {
   const { queryStringParameters } = event;
   const { page } = queryStringParameters;
@@ -19,15 +18,15 @@ exports.handler = async (event) => {
 
     const data = await response.json();
 
-    const articles = data.results.map((art: Record<string, any>) => {
-      const article: any = {
+    const articles = data.results.map((art) => {
+      const article = {
         url: art.url,
         abstract: art.abstract,
         date: art.published_date,
         author: art.byline,
         id: uuidv4(),
         images: art.multimedia
-          ? art.multimedia.map((img: Record<string, any>) => img.url)
+          ? art.multimedia.map((img) => img.url)
           : ['./src/assets/noimg.svg.webp'],
         section: art.section,
         title: art.title,
@@ -37,14 +36,14 @@ exports.handler = async (event) => {
     });
 
     const returnObj = articles
-      .sort((a: any, b: any) => {
+      .sort((a, b) => {
         return a.date.localeCompare(b.date);
       })
       .reverse();
 
     return {
       statusCode: 200,
-      body: JSON.stringify({ returnObj }),
+      body: JSON.stringify(returnObj),
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
