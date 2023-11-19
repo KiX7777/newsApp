@@ -1,5 +1,5 @@
-/infinite/* /.netlify/functions/infinite/api 200
-/latest/* /.netlify/functions/latest/api 200
-/search/* /.netlify/functions/search/api 200
+/infinite/* /.netlify/functions/infinite 200
+/latest/* /.netlify/functions/latest 200
+/search/* /.netlify/functions/search 200
 
 /* /index.html 200

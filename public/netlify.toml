@@ -9,6 +9,16 @@ publish = "public"  # Adjust this to the directory where your frontend files are
 directory = "netlify/functions"  # Create this directory for your serverless functions
 
 [[redirects]]
-from = "/api/*"
-to = "/.netlify/functions/api"  # Map API requests to serverless functions
+from = "/search/*"
+to = "/.netlify/functions/search"  # Map API requests to serverless functions
+status = 200
+
+[[redirects]]
+from = "/infinite/*"
+to = "/.netlify/functions/infinite"  # Map API requests to serverless functions
+status = 200
+
+[[redirects]]
+from = "/latest/*"
+to = "/.netlify/functions/latest"  # Map API requests to serverless functions
 status = 200
