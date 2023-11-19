@@ -1,6 +1,6 @@
 import classes from './Home.module.css';
 import ArticleCard from '../Components/ArticleCard';
-import LatestNews from '../Components/LatestNews';
+// import LatestNews from '../Components/LatestNews';
 import { useAppDispatch, useAppSelector } from '../Store/store';
 import { useEffect } from 'react';
 import { GridLoader } from 'react-spinners';
