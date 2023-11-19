@@ -1,7 +1,7 @@
-// netlify-functions/api.js
 import { v4 as uuidv4 } from 'uuid';
-// eslint-disable-next-line @typescript-eslint/no-var-requires, no-undef
-const axios = require('axios');
+// const axios = require('axios');
+import axios from 'axios';
+
 const APIKEY = 'a32a159ec4bf4ba9ad86a81b74194867';
 // eslint-disable-next-line no-undef
 exports.handler = async (event) => {
